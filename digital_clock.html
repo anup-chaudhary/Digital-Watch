@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300..900&family=Gravitas+One&family=Imperial+Script&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Monoton&display=swap"
+        rel="stylesheet">
+    <style>
+        #main {
+            height: 250px;
+            width: 400px;
+            border: 2px solid red;
+            margin: 50px auto;
+            padding: 10px;
+            background-color: black;
+            color: red;
+            border-radius: 10px;
+            font-family: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .weeks {
+            display: flex;
+            gap: 10px;
+            text-decoration: none;
+            list-style: none;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .weeks li.highlight {
+            background-color: red;
+            color: black;
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        #time_section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            color: Red;
+            font-family: "Monoton", serif;
+            margin-top: 20px;
+        }
+
+        #final {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
+            color: white;
+        }
+
+        .day_style {
+            padding: 10px;
+            color: red;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .month_style {
+            padding: 10px;
+            color: red;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .year_style {
+            padding: 10px;
+            color: red;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        @media screen(max-width=) {}
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="time_section"></div>
+        <ul class="weeks">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+        </ul>
+
+        <div id="final"></div>
+    </div>
+
+    <script>
+        function time_zone() {
+            const date = new Date();
+            let hours = String(date.getHours()).padStart(2, '0');
+            let minutes = String(date.getMinutes()).padStart(2, '0');
+            let seconds = String(date.getSeconds()).padStart(2, '0');
+            const timeResult = `${hours} : ${minutes} : ${seconds}`;
+            document.getElementById('time_section').innerText = timeResult;
+        }
+        setInterval(time_zone, 1000);
+        const date = new Date();
+        const currentDay = date.getDay();
+        const weekItems = document.querySelectorAll('.weeks li');
+        weekItems[currentDay].classList.add('highlight');
+
+        // Display current date, month, and year
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        const finalOutput = `<span class="day_style">${day}</span> Day  <span class="month_style">${month}</span> Month <span class ="year_style">${year}</span> Year`;
+        document.getElementById('final').innerHTML = finalOutput;
+    </script>
+</body>
+
+</html>
